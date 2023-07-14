@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String        @id @default(uuid())
+  username       String        @unique
+  name           String
+  hashedpassword String
+  age            Int
+  balance        Int?          @default(0)
+  transaction    Transaction[]
+}
+
+model Transaction {
+  id            String    @id @default(uuid())
+  userId        String
+  movieId       BigInt?
+  seats         Int[]
+  watchdatetime DateTime?
+  amount        Int
+  totalprice    Int? 
+
+  reservedate DateTime @default(now())
+
+  user  User   @relation(fields: [userId], references: [id])
+  movie Movie? @relation(fields: [movieId], references: [id])
+}
+
+model Movie {
+  id           BigInt @id @default(autoincrement())
+  title        String
+  description  String
+  release_date String
+  poster_url   String
+  age_rating   Int
+  ticket_price Int
+
+  Transaction Transaction[]
+}
