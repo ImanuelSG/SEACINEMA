@@ -42,7 +42,7 @@ const MoviePage = async ({params} : {params:Iparams}) => {
       </div>
       <div className="  md:py-8 text-center">
         <h1 className="text-4xl font-bold mb-4">{title}</h1>
-        <p className="text-gray-600 mb-4 text-2xl">{description}</p>
+        <p className="text-gray-600 mb-4 text-2xl">&quot;{description}&quot;</p>
         <div className="flex flex-row mt-10">
   <div className="flex flex-col items-center mb-4 flex-grow border-r-4 border-slate-950 pr-4">
     <span className="font-bold text-xl">Release Date</span>

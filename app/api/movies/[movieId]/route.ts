@@ -1,10 +1,11 @@
 import prisma from '@/app/libs/prismadb';
+import { NextRequest } from 'next/server';
 
 interface Params {
   movieId: number;
 }
 
-export  async function POST({ params }: { params: Params }) {
+export  async function POST(req:NextRequest,{ params }: { params: Params }) {
   const { movieId } = params;
 
   if (!movieId) {
