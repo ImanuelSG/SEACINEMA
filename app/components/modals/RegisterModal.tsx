@@ -9,12 +9,15 @@ import Heading from '../Heading';
 import Input from '../inputs/input';
 import { toast } from 'react-hot-toast';
 import useLoginModal from '@/app/hooks/useLoginModal';
+import Router from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter()
   const { register, handleSubmit, formState: { errors } } =
     useForm<FieldValues>({
       defaultValues: {
@@ -43,6 +46,9 @@ const RegisterModal = () => {
       })
       .finally(() => {
         setIsLoading(false);
+        router.refresh()
+      
+        
       });
   };
 

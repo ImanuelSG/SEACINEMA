@@ -46,6 +46,7 @@ const onSubmit: SubmitHandler<FieldValues> = (data) => {
         toast.error(callback.error)
       }
       loginModal.onClose();
+      router.refresh()
     })
     .catch((error) => {
       console.error(error);

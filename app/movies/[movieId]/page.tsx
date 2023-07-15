@@ -27,7 +27,7 @@ const MoviePage = async ({params} : {params:Iparams}) => {
         
       } = movie;
 
-      const date = new Date();
+      const date = new Date((new Date()).setTime((new Date()).getTime() + (7 * 60 * 60 * 1000)));
       const dateAt11 = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 11, 0, 0);
       const dateAt14= new Date(date.getFullYear(), date.getMonth(), date.getDate(), 14, 0, 0);
       const dateAt17= new Date(date.getFullYear(), date.getMonth(), date.getDate(), 17, 0, 0);

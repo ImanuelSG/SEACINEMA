@@ -2,6 +2,7 @@
 import { Movie } from "@prisma/client";
 import { useRouter } from "next/navigation";
 
+
 interface MovieCardProps{
     data: Movie;
     onAction?: (id:string) => void;
@@ -13,7 +14,7 @@ const MovieCard : React.FC<MovieCardProps>= ({
     const router = useRouter();
     const handlePush = () => {
         router.push(`/movies/${data.id}`,{scroll:true});
-          router.refresh();
+          router.refresh()
         };
       
     return (

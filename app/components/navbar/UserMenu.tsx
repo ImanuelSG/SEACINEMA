@@ -20,6 +20,7 @@ const UserMenu : React.FC<UserMenuProps>= ({currentUser}) => {
     const toggleOpen = useCallback(() => {
         setIsOpen((value) => (!value));
     }, []);
+    
     const onSignOut = ()=>{
         toast.promise(
             signOut(),{

@@ -42,7 +42,7 @@ export async function POST (request: NextRequest, {params} : {params:Iparams}){
             movie:{connect:{id:movie.id}},
             user:{connect:{id:user.id}},
             seats,
-            reservedate:new Date(),
+            reservedate:new Date((new Date()).setTime((new Date()).getTime() + (7 * 60 * 60 * 1000))),
             totalprice:-(totalprice),
             watchdatetime:new Date(Number(params.watchtime))
         }

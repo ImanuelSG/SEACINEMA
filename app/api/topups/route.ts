@@ -16,7 +16,7 @@ export async function POST (request: Request){
             seats: [],
             watchdatetime: null,
             totalprice: 0,
-            reservedate: new Date() }}
+            reservedate: new Date((new Date()).setTime((new Date()).getTime() + (7 * 60 * 60 * 1000))) }}
     )
     await prisma.user.update({
         where:{
