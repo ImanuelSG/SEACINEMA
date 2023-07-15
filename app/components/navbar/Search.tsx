@@ -54,6 +54,7 @@ const Search : React.FC<SearchProps>= ({currentUser}) => {
                     
                     MOVIES
                 </div>
+                
             </div>
 
         </div>

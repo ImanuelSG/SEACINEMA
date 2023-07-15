@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import useRegisterModal from '@/app/hooks/useRegisterModal';
 import Modal from './Modal';
@@ -40,11 +40,12 @@ const onSubmit: SubmitHandler<FieldValues> = (data) => {
       if (callback?.ok) {
         toast.success("Logged in");
         router.refresh();
-        loginModal.onClose();
+        
       }
       if (callback?.error){
         toast.error(callback.error)
       }
+      loginModal.onClose();
     })
     .catch((error) => {
       console.error(error);
@@ -80,7 +81,7 @@ const onSubmit: SubmitHandler<FieldValues> = (data) => {
       <hr />
       <div className='text-neutral-500 text-center mt-4 font-light'>
         <div className='justify-center flex flex-row items-center gap-2'>
-          <div>Don't have an account?</div>
+          <div>Dont have an account?</div>
           <div onClick={() => {loginModal.onClose();registerModal.onOpen();
   
 }} className='text-neutral-800 cursor-pointer hover:underline'>Register.</div>

@@ -3,8 +3,7 @@ interface Iparams{
     movieId?: number;
 }
 
-export default async function getMoviesbyId(
-    params:Iparams
+export default async function getMoviesbyId(params:Iparams
 ){
     try{
         const { movieId } = params

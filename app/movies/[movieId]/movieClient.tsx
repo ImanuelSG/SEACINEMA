@@ -1,5 +1,7 @@
 'use client'
 
+import useLoginModal from "@/app/hooks/useLoginModal";
+import { User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 
 interface ClientProps {
@@ -7,13 +9,17 @@ interface ClientProps {
   time: string;
   currentTime: number
   showTime: number
+  user: User | null
 
 }
 
-const MovieClientButton: React.FC<ClientProps> = ({ path, time,currentTime ,showTime}) => {
+const MovieClientButton: React.FC<ClientProps> = ({ path, time,currentTime ,showTime, user}) => {
   const router = useRouter();
-
+  const loginmodal = useLoginModal();
   const handleClick = () => {
+    if(user==null){
+      loginmodal.onOpen()
+    }else
     router.push(`/movies/${path}`);
     router.refresh()
      // Scroll to the top of the page

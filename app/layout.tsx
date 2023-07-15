@@ -11,7 +11,7 @@ import LoginModal from "./components/modals/LoginModal"
 import getCurretUser from "./actions/getCurrentUser"
 import TopUpModal from "./components/modals/TopUpModal"
 import WithdrawModal from "./components/modals/WithDrawModal"
-import ConfirmModal from "./components/modals/ConfirmModal"
+
 const inter = Inter({ subsets: ['latin'] })
 const font = Nunito ({ subsets: ['latin']})
 

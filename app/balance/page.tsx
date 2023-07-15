@@ -35,7 +35,7 @@ const BalancePage = async () => {
         <div className="text-lg mt-5 mb-5">Your balance :</div>
         <div className="text-xl font-semibold text-red-500 mb-5">{formattedBalance}</div>
         <BalanceClient />
-        {Array.isArray(transactions) ? (
+        {Array.isArray(transactions) && transactions.length > 0 ? (
           <table className="border-2 border-slate-950 mx-auto mt-5">
             <thead>
               <tr>

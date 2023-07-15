@@ -8,13 +8,13 @@ interface Iparams{
     watchtime: number;
 }
 export async function POST (request: NextRequest, {params} : {params:Iparams}){
-    const body =  await request.text()
-
-    if(!body){
     
+    const body =  await request.json()
+    if(!body){
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
     }
-    const seats = JSON.parse(body) as number[]
+    const seats = body as number[]
+    
     const user = await getCurrentUser()
 
     const movie = await getMoviesbyId(params)
@@ -31,6 +31,7 @@ export async function POST (request: NextRequest, {params} : {params:Iparams}){
         return NextResponse.json({ error: 'You are not old enough' }, { status: 500 })
     }
     const totalprice=movie.ticket_price*seats.length
+
     if( user.balance == null ||user.balance < totalprice )
     {   
         return NextResponse.json({ error: 'Insufficient Balance' }, { status: 500 })

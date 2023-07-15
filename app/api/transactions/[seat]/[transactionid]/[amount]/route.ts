@@ -1,23 +1,27 @@
 import getCurrentUser from '@/app/actions/getCurrentUser';
 import prisma from '@/app/libs/prismadb';
+import { NextRequest, NextResponse } from 'next/server';
 
-interface Params {
+interface Iparams {
+  
   seat: number;
-  transactionid: string;
   amount: number;
+  transactionid: string;
+  
 }
 
-export async function DELETE({ params }: { params: Params }) {
-    console.log(params)
-  const { seat, transactionid ,amount} = params;
-
+export async function DELETE(request:NextRequest,  {params} : {params :Iparams }) {
+  
+  const seat = params.seat
+  const amount = params.amount
+  const transactionid = params.transactionid
   if (!seat) {
     throw new Error('seat not provided');
   }
 
-  try {
     const user = await getCurrentUser();
-    if(!user || !user.balance){throw new Error('Movie not found')};
+    if(!user || !user.balance)
+      {throw new Error('User not found')};
     const transaction = await prisma.transaction.findUnique({
       where: { id:transactionid
         
@@ -25,14 +29,9 @@ export async function DELETE({ params }: { params: Params }) {
     });
 
     if (!transaction) {
-      throw new Error('Movie not found');
+      return NextResponse.json({error:'Internal Server Error'}, {status : 200});
     }
-    if (!transaction) {
-        console.error('Transaction not found');
-        return;
-      }
-  
-      const updatedSeats = transaction.seats.filter((s) => s !== seat);
+      const updatedSeats = transaction.seats.filter((s) => s !== Number(seat));
   
       await prisma.transaction.update({
         where: { id: transactionid },
@@ -42,13 +41,9 @@ export async function DELETE({ params }: { params: Params }) {
         where:{id: user.id
 
         },data:{
-            balance: user.balance+Math.abs(amount)
+            balance: user.balance+Math.abs(Number(amount))
         }
 
       })
-  
-    } catch (error) {
-      console.error('Failed to delete seat:', error);
-    
-  }
+      return NextResponse.json({user}, {status : 200})
 }

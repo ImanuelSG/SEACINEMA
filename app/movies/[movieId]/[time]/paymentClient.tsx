@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import ConfirmModal from "@/app/components/modals/ConfirmModal";
 import useConfirmModal from "@/app/hooks/useConfirmModal";
 import {toast} from "react-hot-toast"
-import  axios  from "axios";
+
 interface PaymentClientProps {
   soldSeats: number[][];
   movietitle: string;
@@ -45,11 +45,11 @@ interface PaymentClientProps {
     const isSeatSoldOut = soldSeats.some((section) =>section.includes(seatNumber))
     return (
       
-      <button
+      <button 
         key={seatNumber.toString()}
         disabled={(selectedSeats.length>=6 &&!isSeatSelected) || (isSeatSoldOut)?(true):(false)}
         className={`px-2 py-1 mx-1 my-1 rounded ${
-          isSeatSelected ? 'bg-green-500' : isSeatSoldOut ? "bg-red-500":'bg-gray-200'
+          isSeatSoldOut ? "bg-red-500" : isSeatSelected ? 'bg-green-500':'bg-gray-200'
         } disabled:opacity-30 disabled:cursor-not-allowed`}
         onClick={() => handleSeatClick(seatNumber)}
         
@@ -67,19 +67,26 @@ interface PaymentClientProps {
   const onSubmit = async (seats:Number[]) => {
     try {
       setIsLoading(true);
-      const convertedSeats = seats.map((seat) => Number(seat));
+      
       const toastId = toast.loading("Loading...");
-      const response = await axios.post(`/api/movies/${movieId.toString()}/${time.toString()}`,
-        convertedSeats
+      const response = await fetch(`/api/movies/${movieId.toString()}/${time.toString()}`,
+        {
+          method:"POST",
+          body:JSON.stringify(seats)
+          
+        }
       );
-      if (response?.status === 200) {
+    
+      const data = await response.json()
+      if (response.ok) {
         toast.dismiss(toastId);
         toast.success("Ticket Purchased");
         router.refresh();
         confirmModal.onClose();
+        router.push('/')
       } else {
         toast.dismiss(toastId);
-        toast.error(response.data.error);
+        toast.error(data.error);
       }
     } catch (error: any) {
       toast.dismiss();
@@ -134,7 +141,7 @@ interface PaymentClientProps {
         
       >
         Cancel
-      </button><ConfirmModal seats={selectedSeats} movietitle={movietitle} movieId={movieId} watchdate={new Date(time)} onConfirm={() =>onSubmit(selectedSeats)}/></div>
+      </button><ConfirmModal seats={selectedSeats} movietitle={movietitle} watchdate={new Date(time)} onConfirm={() =>onSubmit(selectedSeats)}/></div>
   </div>
 );
 

@@ -3,7 +3,7 @@ import PaymentClient from "./paymentClient";
 import getMoviesbyId from "@/app/actions/getMoviebyId";
 import { redirect } from "next/navigation";
 import getCurrentUser from "@/app/actions/getCurrentUser";
-import useLoginModal from "@/app/hooks/useLoginModal";
+
 
 interface Iparams {
     movieId?: number;

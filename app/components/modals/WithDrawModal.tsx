@@ -37,16 +37,19 @@ const WithdrawModal = ()=>{
         const toastId = toast.loading('Loading...');
         
         data.amount = -amountValue; // Convert the value to negative
-        const response = await axios.post('/api/withdraw', data);
-    
-        if (response?.status === 200) {
+        const response = await fetch('/api/withdraw', {
+          method:"POST",
+          body:JSON.stringify(data)
+        });
+        const resjson = await response.json()
+        if (response.ok) {
           toast.dismiss(toastId);
-          toast.success('Withdraw successful');
-          router.refresh();
-          withdrawmodal.onClose();
+          toast.success('Withdraw successful')
+          router.refresh()
+          withdrawmodal.onClose()
         } else {
           toast.dismiss(toastId);
-          toast.error(response.data.error);
+          toast.error(resjson.error);
         }
       } catch (error : any) {
         toast.dismiss()
