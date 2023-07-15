@@ -87,7 +87,7 @@ const TicketClient: React.FC<ClientProps> = ({ transactions }) => {
                 <tr key={seat} className="border text-center">
                   <td className="py-2 px-4">{seat}</td>
                   <td className="py-2 px-4">{getMovieTitleById(Number(transaction.movieId))}</td>
-                  <td className="py-2 px-4">{transaction.watchdatetime?.toDateString()}</td>
+                  <td className="py-2 px-4">{formatReserveDate(transaction.watchdatetime)}</td>
                   <td className="py-2 px-4">{Math.abs(transaction.amount)}</td>
                   <td className="py-2 px-4">{transaction.totalprice?(Math.abs(transaction.totalprice)):(0)}</td>
                   <td className="py-2 px-4">

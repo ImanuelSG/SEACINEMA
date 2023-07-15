@@ -28,10 +28,10 @@ const MoviePage = async ({params} : {params:Iparams}) => {
       } = movie;
 
       const date = new Date((new Date()).setTime((new Date()).getTime() + (7 * 60 * 60 * 1000)));
-      const dateAt11 = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 11, 0, 0);
-      const dateAt14= new Date(date.getFullYear(), date.getMonth(), date.getDate(), 14, 0, 0);
-      const dateAt17= new Date(date.getFullYear(), date.getMonth(), date.getDate(), 17, 0, 0);
-        const dateAt20 = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 20, 0, 0);
+      const dateAt11 = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 4, 0, 0);
+      const dateAt14= new Date(date.getFullYear(), date.getMonth(), date.getDate(), 7, 0, 0);
+      const dateAt17= new Date(date.getFullYear(), date.getMonth(), date.getDate(), 10, 0, 0);
+        const dateAt20 = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 13, 0, 0);
 
     return ( <div className="container mx-auto py-8 " >
     <div className="flex flex-col ">
