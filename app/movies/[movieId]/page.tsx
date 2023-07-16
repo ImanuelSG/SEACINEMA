@@ -62,10 +62,10 @@ const MoviePage = async ({params} : {params:Iparams}) => {
 
 <div className="text-xl font-bold py-5"> {date.toDateString()}</div>
 <div className="flex flex-row justify-center">
-<MovieClientButton path={`/${movie.id}/${dateAt11.getTime()}`} time="11:00" currentTime={date.getTime()} showTime={dateAt11.getTime()} user={user?(user):(null)}/>
-<MovieClientButton path={`/${movie.id}/${dateAt14.getTime()}`} time="14:00"currentTime={date.getTime()} showTime={dateAt14.getTime() } user={user?(user):(null)}/>
-<MovieClientButton path={`/${movie.id}/${dateAt17.getTime()}`} time="17:00" currentTime={date.getTime()} showTime={dateAt17.getTime() } user={user?(user):(null)}/>
-<MovieClientButton path={`/${movie.id}/${dateAt20.getTime()}`} time="20:00" currentTime={date.getTime()} showTime={dateAt20.getTime()} user={user?(user):(null)}/>
+<MovieClientButton path={`/${movie.id}/${dateAt11.getTime()}`} time="11:00" currentTime={date.getTime()} showTime={dateAt11.getTime()+ (7 * 60 * 60 * 1000)} user={user?(user):(null)}/>
+<MovieClientButton path={`/${movie.id}/${dateAt14.getTime()}`} time="14:00"currentTime={date.getTime()} showTime={dateAt14.getTime()+ (7 * 60 * 60 * 1000) } user={user?(user):(null)}/>
+<MovieClientButton path={`/${movie.id}/${dateAt17.getTime()}`} time="17:00" currentTime={date.getTime()} showTime={dateAt17.getTime()+ (7 * 60 * 60 * 1000) } user={user?(user):(null)}/>
+<MovieClientButton path={`/${movie.id}/${dateAt20.getTime()}`} time="20:00" currentTime={date.getTime()} showTime={dateAt20.getTime()+ (7 * 60 * 60 * 1000)} user={user?(user):(null)}/>
 
 </div>
 
