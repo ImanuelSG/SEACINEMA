@@ -5,7 +5,7 @@ interface Params {
   movieId: number;
 }
 
-export  async function POST(req:NextRequest,{ params }: { params: Params }) {
+export async function POST(req:NextRequest,{ params }: { params: Params }) {
   const { movieId } = params;
 
   if (!movieId) {
